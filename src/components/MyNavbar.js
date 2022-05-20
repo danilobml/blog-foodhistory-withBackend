@@ -8,8 +8,10 @@ const MyNavbar = () => {
   return (
     <Navbar className="color-nav" expand="lg">
       <Container fluid>
-        <Navbar.Brand href="/">
-          <Image width="100px" height="50px" className="img-responsive" src={logo} alt="logo" />A Taste of History
+        <Navbar.Brand>
+          <Link className="custom-link" id="brand-link" to="/">
+            <Image width="100px" height="50px" className="img-responsive" src={logo} alt="logo" />A Taste of History
+          </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">

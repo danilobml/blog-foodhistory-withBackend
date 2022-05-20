@@ -25,7 +25,13 @@
     padding-left: 0.5rem;
     color: rgba(0, 0, 0, 0.55);
   }
-  
+
+  #brand-link {
+    font-size: 1.6rem;
+  }
+
+
   .color-nav {
     background-color: #ffefd8;
   }
+
