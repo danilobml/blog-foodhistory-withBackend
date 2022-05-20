@@ -20,11 +20,11 @@ function App() {
   return (
     <div className="App">
       <MyNavbar />
-      <Container className="mt-4 flex-row">
-        <Row>
+      <Container className="mt-5 me-5 flex-row">
+        <Row className="g-4">
           {content &&
             blogPosts.map((item, index) => (
-              <Col className="m-3" key={index}>
+              <Col className="m-4" key={index}>
                 <PostCard item={item} />
               </Col>
             ))}
