@@ -3,22 +3,34 @@ import { useParams } from "react-router-dom";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import MyNavbar from "./MyNavbar";
 import client from "../contentful/client";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { BLOCKS } from "@contentful/rich-text-types";
 
 const Post = () => {
   const { postId } = useParams();
   const [content, setContent] = useState();
   useEffect(() => {
-    client.getEntry(postId).then((data) => setContent(data));
+    client.getEntry(postId, { include: 10 }).then((data) => setContent(data));
   }, []);
-  console.log(content);
+  // console.log(content);
+
+  const renderOptions = {
+    renderNode: {
+      [BLOCKS.EMBEDDED_ASSET]: (node, children) => {
+        return <img src={`https://${node.data.target.fields.file.url}`} height={node.data.target.fields.file.details.image.height} width={node.data.target.fields.file.details.image.width} alt={node.data.target.fields.description} />;
+      },
+    },
+  };
 
   if (!content) {
     return null;
   }
+  console.log(content);
+
   return (
     <>
       <MyNavbar />
-      <Image fluid style={{ width: "100%", height: "450px" }} src={content.fields.heroimage.fields.file.url} />
+      <Image fluid style={{ width: "100%", height: "450px", objectFit: "cover" }} src={content.fields.heroimage.fields.file.url} />
       <Container clasName="justify-content-sm-center main-container">
         <Row>
           <Col className="m-3">
@@ -44,7 +56,7 @@ const Post = () => {
         </Row>
         <Row>
           <Col sm={12} className="mb-5">
-            <h4 style={{ color: "red" }}>Here we will put the "History" elements (text and pics). But it seems quite complex to select them directly from the data, though we definitely can. Ben said there is a simpler way, so maybe we could ask him tomorrow.</h4>
+            {documentToReactComponents(content.fields.history, renderOptions)}
           </Col>
         </Row>
         <Row>
