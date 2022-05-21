@@ -12,7 +12,6 @@ const Post = () => {
   useEffect(() => {
     client.getEntry(postId, { include: 10 }).then((data) => setContent(data));
   }, []);
-  // console.log(content);
 
   const renderOptions = {
     renderNode: {
@@ -25,13 +24,12 @@ const Post = () => {
   if (!content) {
     return null;
   }
-  console.log(content);
 
   return (
     <>
       <MyNavbar />
       <Image fluid style={{ width: "100%", height: "450px", objectFit: "cover" }} src={content.fields.heroimage.fields.file.url} />
-      <Container clasName="justify-content-sm-center main-container">
+      <Container className="justify-content-sm-center main-container">
         <Row>
           <Col className="m-3">
             <h1>{content.fields.headline}</h1>
@@ -39,7 +37,7 @@ const Post = () => {
         </Row>
         <Row>
           <Col sm={2} className="me-0">
-            <Image roundedCircle src={content.fields.author.fields.authorpic.fields.file.url} style={{ width: "100px", height: "100px", marginTop: "1.2rem" }} />
+            <Image src={content.fields.author.fields.authorpic.fields.file.url} style={{ width: "100px", height: "100px", marginTop: "1.2rem" }} />
           </Col>
           <Col sm={3} className="ms-0">
             <hr />

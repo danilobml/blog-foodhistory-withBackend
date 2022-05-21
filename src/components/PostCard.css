@@ -2,4 +2,35 @@
     text-decoration: none;
     color: black;
     cursor: pointer;
+    position: relative;
+}
+
+#typeTag {
+    width: 150px;
+    border-radius: 3px;
+    position: absolute;
+    z-index: 1;
+    margin-top: 20px;
+    margin-left: -20px;
+    padding: 5px 20px;
+}
+
+#typeTag.Ingredients {
+    background-color: black;
+    color: white;
+}
+
+#typeTag.Travels {
+    background-color: darkolivegreen;
+    color: white;
+}
+
+#typeTag.Recipes {
+    background-color: darkgoldenrod;
+    color: white;
+}
+
+#typeTag.Lost_foods {
+    background-color: darkslategray;
+    color: white;
 }
