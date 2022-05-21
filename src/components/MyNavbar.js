@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "./MyNavbar.css";
 import logo from "../images/logo.jpg";
 
-const MyNavbar = () => {
+const MyNavbar = ({ onInput, onSubmit }) => {
   return (
     <Navbar className="color-nav" expand="lg">
       <Container fluid>
@@ -23,15 +23,31 @@ const MyNavbar = () => {
               About{" "}
             </Link>
             <NavDropdown title="Categories" id="categories-dropdown">
-              <NavDropdown.Item href="#action/3.1">Cuisines</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">Recipes</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Travels</NavDropdown.Item>
+              <NavDropdown.Item>
+                <Link className="custom-link" to="/Ingredients">
+                  Ingredients
+                </Link>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Link className="custom-link" to="/Recipes">
+                  Recipes
+                </Link>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <Link className="custom-link" to="/Travels">
+                  Travels
+                </Link>
+              </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.3">Lost Foods</NavDropdown.Item>
+              <NavDropdown.Item>
+                <Link className="custom-link" to="/Lost_foods">
+                  Lost Foods
+                </Link>
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          <Form className="d-flex mr-auto">
-            <FormControl type="search" placeholder="Search" className="me-2" aria-label="Search" />
+          <Form className="d-flex mr-auto" onSubmit={(e) => onSubmit(e)}>
+            <FormControl type="search" placeholder="Search" className="me-2" aria-label="Search" onInput={(e) => onInput(e)} />
             <Button variant="outline-dark">Search</Button>
           </Form>
         </Navbar.Collapse>
@@ -41,3 +57,7 @@ const MyNavbar = () => {
 };
 
 export default MyNavbar;
+
+// client.getEntries({
+// 'query': state
+// })
