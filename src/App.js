@@ -9,13 +9,8 @@ function App() {
   const [content, setContent] = useState();
   console.log(content);
   useEffect(() => {
-    client.getEntries().then((data) => setContent(data));
+    client.getEntries({ content_type: "blogPost" }).then((data) => setContent(data));
   }, []);
-
-  let blogPosts = [];
-  if (content) {
-    blogPosts = content.items.filter((item) => !("name" in item.fields));
-  }
 
   return (
     <div className="App">
@@ -23,7 +18,7 @@ function App() {
       <Container className="mt-5 me-5 flex-row">
         <Row className="g-4">
           {content &&
-            blogPosts.map((item, index) => (
+            content.items.map((item, index) => (
               <Col className="m-4" key={index}>
                 <PostCard item={item} />
               </Col>
