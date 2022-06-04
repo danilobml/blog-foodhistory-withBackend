@@ -9,20 +9,14 @@ const About = () => {
   const [author, setAuthor] = useState();
 
   useEffect(() => {
-    client
-      .getEntries({ content_type: "about" })
-      .then((data) => setContent(data));
-    client
-      .getEntries({ content_type: "author" })
-      .then((info) => setAuthor(info));
+    client.getEntries({ content_type: "about" }).then((data) => setContent(data));
+    client.getEntries({ content_type: "author" }).then((info) => setAuthor(info));
   }, []);
 
   return (
-    <Container className="justify-content-sm-center main-container">
+    <Container className="d-flex flex-column text-start">
       <Row>
-        <Col className="m-3 ms-0">
-          {content && <h1>{content.items[0].fields.headline}</h1>}
-        </Col>
+        <Col className="m-3 ms-0">{content && <h1>{content.items[0].fields.headline}</h1>}</Col>
       </Row>
       <Row>
         <Col sm={12} className="mb-5">

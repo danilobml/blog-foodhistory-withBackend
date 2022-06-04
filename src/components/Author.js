@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col, Image } from "react-bootstrap";
-import MyNavbar from "./MyNavbar";
 import client from "../contentful/client";
 
 function Author() {
@@ -18,8 +17,7 @@ function Author() {
   console.log(author);
   return (
     <>
-      <MyNavbar />
-      <Container className="d-flex flex-column justify-content-center">
+      <Container className="d-flex flex-column text-start">
         <Row className="mt-5 mb-3">
           <Col>
             <Image style={{ height: "300px", width: "300px" }} src={author.fields.authorpic.fields.file.url} />

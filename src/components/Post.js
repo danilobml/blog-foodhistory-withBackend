@@ -16,7 +16,7 @@ const Post = () => {
   const renderOptions = {
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: (node, children) => {
-        return <img src={`https://${node.data.target.fields.file.url}`} height={node.data.target.fields.file.details.image.height} width={node.data.target.fields.file.details.image.width} alt={node.data.target.fields.description} />;
+        return <img src={`https://${node.data.target.fields.file.url}`} height={node.data.target.fields.file.details.image.height} width={node.data.target.fields.file.details.image.width} alt={node.data.target.fields.description} style={{ justifySelf: "center" }} />;
       },
     },
   };
@@ -27,9 +27,8 @@ const Post = () => {
 
   return (
     <>
-      <MyNavbar />
       <Image fluid style={{ width: "100%", height: "450px", objectFit: "cover" }} src={content.fields.heroimage.fields.file.url} />
-      <Container className="justify-content-sm-center main-container">
+      <Container className="d-flex flex-column text-start">
         <Row>
           <Col className="m-3">
             <h1>{content.fields.headline}</h1>

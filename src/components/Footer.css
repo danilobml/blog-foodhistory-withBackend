@@ -1,0 +1,16 @@
+.footer {
+    background-color: #ffefd8;
+    padding: 0.4rem;
+}
+
+.social-icon {
+    width: 35px;
+    margin: 15px;
+    margin-top: 5px;
+}
+
+.email {
+    text-decoration: none;
+    color: black;
+    font-size: 1.1rem;
+}
