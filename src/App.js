@@ -9,6 +9,7 @@ import Post from "./components/Post";
 import Author from "./components/Author";
 import Footer from "./components/Footer";
 import Books from "./components/Books";
+import SignupModal from "./components/SignupModal";
 import "./App.css";
 
 function App() {
@@ -17,15 +18,25 @@ function App() {
   const [searchText, setSearchText] = useState("");
   const [skip, setSkip] = useState(0);
   const [page, setPage] = useState(1);
-  const limit = 6;
-
+  const [limit, setLimit] = useState(6);
+  const [modalShow, setModalShow] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!localStorage.getItem("a_taste_of_history_blog")) {
+      setTimeout(() => {
+        setModalShow(true);
+      }, 3000);
+    }
+
+    localStorage.setItem("a_taste_of_history_blog", "true");
+  }, []);
 
   useEffect(() => {
     client.getEntries({ content_type: "blogPost", query: searchText, limit, skip }).then((data) => {
       setContent(data);
     });
-  }, [searchText, skip]);
+  }, [searchText, skip, limit]);
 
   const handleNextPage = () => {
     const nextSet = skip + limit;
@@ -55,16 +66,19 @@ function App() {
     setSearchText(userInput);
     setUserInput("");
     navigate("/");
+    setLimit(6);
   };
 
   const handleGoHome = () => {
     setSearchText("");
     setSkip(0);
     setPage(1);
+    setLimit(6);
   };
 
   const handleCategorySelect = () => {
     setSearchText("");
+    setLimit(100);
   };
 
   if (!content) return <h1>Loading...</h1>;
@@ -80,6 +94,8 @@ function App() {
         <Route path="/author/:authorId" element={<Author />} />
         <Route path="/books" element={<Books />} />
       </Routes>
+      <SignupModal show={modalShow} onHide={() => setModalShow(false)} />
+
       <Footer />
     </div>
   );

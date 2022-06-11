@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Container, Row, Col, Image } from "react-bootstrap";
-import MyNavbar from "./MyNavbar";
 import client from "../contentful/client";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import { BLOCKS } from "@contentful/rich-text-types";
+import "./Post.css";
 
 const Post = () => {
   const { postId } = useParams();
@@ -16,7 +16,7 @@ const Post = () => {
   const renderOptions = {
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: (node, children) => {
-        return <img src={`https://${node.data.target.fields.file.url}`} height={node.data.target.fields.file.details.image.height} width={node.data.target.fields.file.details.image.width} alt={node.data.target.fields.description} style={{ justifySelf: "center" }} />;
+        return <img src={`https://${node.data.target.fields.file.url}`} alt={node.data.target.fields.description} className="richttext-img" style={{ justifySelf: "center" }} />;
       },
     },
   };
@@ -24,6 +24,8 @@ const Post = () => {
   if (!content) {
     return null;
   }
+
+  content && console.log(content);
 
   return (
     <>
@@ -35,16 +37,18 @@ const Post = () => {
           </Col>
         </Row>
         <Row>
-          <Col sm={2} className="me-0">
-            <Image src={content.fields.author.fields.authorpic.fields.file.url} style={{ width: "100px", height: "100px", marginTop: "1.2rem" }} />
-          </Col>
-          <Col sm={3} className="ms-0">
-            <hr />
-            <h4>{content.fields.author.fields.name}</h4>
-            <h6>{content.fields.author.fields.email}</h6>
-            <p>Posted: {content.fields.publishdate}</p>
-            <hr />
-          </Col>
+          <Link className="custom-link author-link" to={`/author/${content.fields.author.sys.id}`}>
+            <Col sm={2} className="me-0">
+              <Image src={content.fields.author.fields.authorpic.fields.file.url} style={{ width: "100px", height: "100px", marginTop: "1.2rem" }} />
+            </Col>
+            <Col sm={3} className="ms-0">
+              <hr />
+              <h4>{content.fields.author.fields.name}</h4>
+              <h6>{content.fields.author.fields.email}</h6>
+              <p>Posted: {content.fields.publishdate}</p>
+              <hr />
+            </Col>
+          </Link>
         </Row>
         <Row>
           <Col sm={12} className="mb-4">

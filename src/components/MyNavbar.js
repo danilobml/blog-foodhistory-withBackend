@@ -15,7 +15,7 @@ const MyNavbar = ({ onInput, onSubmit, userInput, onClickHome, onCategorySelect 
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
-          <Nav className="mr-auto align-items-end">
+          <Nav className="mr-auto align-items-md-end align-items-center">
             <Link to="/" className="custom-link" onClick={onClickHome}>
               Home{" "}
             </Link>

@@ -2,29 +2,32 @@ import PostCard from "./PostCard";
 import { Container, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import Paginate from "./Paginate";
+import NoResults from "./NoResults";
 
 function App({ content, onNextPage, onPrevPage, onPageNumbers, page }) {
   const { category } = useParams();
   return (
-    <div className="App">
-      <Container className="d-flex m-5 justify-content-center">
-        <Row className="g-4">
-          {category
-            ? content &&
-              content.items
-                .filter((item) => item.fields.type === category)
-                .map((item, index) => (
+    <>
+      <Container className="d-flex min-vh-100 mt-5 justify-center">
+        {content.items.length > 0 ? (
+          <Row className="g-4">
+            {category
+              ? content.items
+                  .filter((item) => item.fields.type === category)
+                  .map((item, index) => (
+                    <Col className="m-4" key={index}>
+                      <PostCard item={item} />
+                    </Col>
+                  ))
+              : content.items.map((item, index) => (
                   <Col className="m-4" key={index}>
                     <PostCard item={item} />
                   </Col>
-                ))
-            : content &&
-              content.items.map((item, index) => (
-                <Col className="m-4" key={index}>
-                  <PostCard item={item} />
-                </Col>
-              ))}
-        </Row>
+                ))}
+          </Row>
+        ) : (
+          <NoResults />
+        )}
       </Container>
       {!category && (
         <Row>
@@ -33,7 +36,7 @@ function App({ content, onNextPage, onPrevPage, onPageNumbers, page }) {
           </Col>
         </Row>
       )}
-    </div>
+    </>
   );
 }
 

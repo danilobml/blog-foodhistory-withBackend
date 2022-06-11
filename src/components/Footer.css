@@ -14,3 +14,11 @@
     color: black;
     font-size: 1.1rem;
 }
+
+@media screen and (max-width:680px) {
+    .social-icon {
+        width: 25px;
+        margin: 5px;
+        margin-top: 5px;
+    }
+}

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import "./PostCard.css";
 
 const AuthorCard = ({ author }) => {
-  // console.log(item);
   return (
     <Card border="0" style={{ width: "30rem", height: "200px" }}>
       <Link to={`/author/${author.sys.id}`} className="card-links">

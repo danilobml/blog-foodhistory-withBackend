@@ -12,6 +12,9 @@
     text-decoration: none;
     color: black;
     cursor: pointer;
+}
+
+#post-card {
     position: relative;
 }
 
@@ -20,8 +23,8 @@
     border-radius: 3px;
     position: absolute;
     z-index: 1;
-    margin-top: 20px;
-    margin-left: -20px;
+    left: -20px;
+    top:20px;
     padding: 5px 20px;
 }
 

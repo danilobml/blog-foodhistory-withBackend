@@ -3,3 +3,11 @@
     opacity:1;
 }
 
+.richtext-img {
+    max-width: 400;
+    max-height: 400;
+}
+
+.author-link{
+    text-align:left;
+}

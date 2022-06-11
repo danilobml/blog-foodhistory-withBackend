@@ -1,20 +1,24 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import client from "../contentful/client";
+import "./Author.css";
 
 function Author() {
   const { authorId } = useParams();
   const [author, setAuthor] = useState();
+  const [posts, setPosts] = useState();
 
   useEffect(() => {
     client.getEntry(authorId, { include: 10 }).then((data) => setAuthor(data));
+    client.getEntries({ content_type: "blogPost", "fields.author.sys.id": authorId }).then((data) => {
+      setPosts(data);
+    });
   }, []);
 
   if (!author) {
     return null;
   }
-  console.log(author);
   return (
     <>
       <Container className="d-flex flex-column text-start">
@@ -34,6 +38,20 @@ function Author() {
             <h4>Email:</h4>
             <p>{author.fields.email}</p>
           </Col>
+        </Row>
+        <br />
+        <Row className="d-flex">
+          <h4>Posts from this Author:</h4>
+          <ul>
+            {posts &&
+              posts.items.map((item, index) => (
+                <li>
+                  <Link to={`/post/${item.sys.id}`} key={index} className="custom-link link-posts">
+                    {item.fields.headline}
+                  </Link>
+                </li>
+              ))}
+          </ul>
         </Row>
       </Container>
     </>

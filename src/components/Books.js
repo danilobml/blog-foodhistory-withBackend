@@ -15,12 +15,12 @@ function Books() {
     return null;
   }
   return (
-    <Container className="books-container d-flex justify-content-center align-items-center text-center ms-5">
+    <Container className="books-container d-flex justify-content-center align-items-center text-center justify-self-center">
       <Row className="g-4">
         <h2>Recommended Readings:</h2>
         {books &&
           books.items.map((book, index) => (
-            <Col key={index} className="m-4">
+            <Col key={index} className="d-flex justify-content-center m-4">
               <BookCard book={book} />
             </Col>
           ))}
