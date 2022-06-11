@@ -8,7 +8,7 @@ function App({ content, onNextPage, onPrevPage, onPageNumbers, page }) {
   const { category } = useParams();
   return (
     <>
-      <Container className="d-flex min-vh-100 mt-5 justify-center">
+      <Container className="d-flex min-vh-100 mt-5 justify-content-center">
         {content.items.length > 0 ? (
           <Row className="g-4">
             {category
