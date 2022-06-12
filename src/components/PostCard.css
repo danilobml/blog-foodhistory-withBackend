@@ -48,3 +48,8 @@
     color: white;
 }
 
+@media screen and (max-width: 530px){
+    .author-card{
+        width:15rem!important;
+    }
+}
