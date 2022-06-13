@@ -22,3 +22,11 @@
         margin-top: 5px;
     }
 }
+
+@media screen and (max-width:420px) {
+    .social-icon {
+        width: 20px;
+        margin: 5px;
+        margin-top: 5px;
+    }
+}

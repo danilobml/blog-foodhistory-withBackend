@@ -10,12 +10,12 @@ const MyNavbar = ({ onInput, onSubmit, userInput, onClickHome, onCategorySelect 
       <Container fluid>
         <Navbar.Brand>
           <Link className="custom-link" id="brand-link" to="/" onClick={onClickHome}>
-            <Image width="100px" height="50px" className="img-responsive" src={logo} alt="logo" />A Taste of History
+            <Image width="100px" height="50px" className="logo img-responsive" src={logo} alt="logo" />A Taste of History
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
-          <Nav className="mr-auto align-items-md-end align-items-center">
+          <Nav className="mr-auto align-items-end">
             <Link to="/" className="custom-link" onClick={onClickHome}>
               Home{" "}
             </Link>
