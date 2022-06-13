@@ -1,5 +1,5 @@
 import client from "./contentful/client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import Main from "./components/Main";
@@ -21,6 +21,7 @@ function App() {
   const [limit, setLimit] = useState(6);
   const [modalShow, setModalShow] = useState(false);
   const navigate = useNavigate();
+  const pageTopRef = useRef(null);
 
   useEffect(() => {
     if (!localStorage.getItem("a_taste_of_history_blog")) {
@@ -36,6 +37,7 @@ function App() {
     client.getEntries({ content_type: "blogPost", query: searchText, limit, skip }).then((data) => {
       setContent(data);
     });
+    window.scrollTo(0, 0);
   }, [searchText, skip, limit]);
 
   const handleNextPage = () => {
@@ -43,6 +45,7 @@ function App() {
     if (nextSet >= content.total) return;
     setSkip(nextSet);
     setPage((nextSet + limit) / limit);
+    pageTopRef.current.scrollIntoView();
   };
 
   const handlePrevPage = () => {
@@ -50,11 +53,13 @@ function App() {
     if (prevSet < 0) return;
     setSkip(prevSet);
     setPage((prevSet + limit) / limit);
+    pageTopRef.current.scrollIntoView();
   };
 
   const handlePageNumbers = (number) => {
     setPage(number);
     setSkip(limit * number - limit);
+    pageTopRef.current.scrollIntoView();
   };
 
   const handleUserInput = (e) => {
@@ -85,7 +90,7 @@ function App() {
 
   return (
     <div className="App">
-      <MyNavbar onInput={handleUserInput} onSubmit={handleSearch} onClickHome={handleGoHome} onCategorySelect={handleCategorySelect} userInput={userInput} />
+      <MyNavbar ref={pageTopRef} onInput={handleUserInput} onSubmit={handleSearch} onClickHome={handleGoHome} onCategorySelect={handleCategorySelect} userInput={userInput} />
       <Routes>
         <Route path="/" element={<Main content={content} onNextPage={handleNextPage} onPrevPage={handlePrevPage} onPageNumbers={handlePageNumbers} page={page} />} />
         <Route path="/:category" element={<Main content={content} />} />
