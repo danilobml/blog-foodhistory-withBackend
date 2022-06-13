@@ -19,6 +19,7 @@ function App() {
   const [skip, setSkip] = useState(0);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(6);
+  const [category, setCategory] = useState();
   const [modalShow, setModalShow] = useState(false);
   const navigate = useNavigate();
   const pageTopRef = useRef(null);
@@ -89,8 +90,8 @@ function App() {
   if (!content) return <h1>Loading...</h1>;
 
   return (
-    <div className="App">
-      <MyNavbar ref={pageTopRef} onInput={handleUserInput} onSubmit={handleSearch} onClickHome={handleGoHome} onCategorySelect={handleCategorySelect} userInput={userInput} />
+    <div ref={pageTopRef} className="App">
+      <MyNavbar onInput={handleUserInput} onSubmit={handleSearch} onClickHome={handleGoHome} onCategorySelect={handleCategorySelect} userInput={userInput} />
       <Routes>
         <Route path="/" element={<Main content={content} onNextPage={handleNextPage} onPrevPage={handlePrevPage} onPageNumbers={handlePageNumbers} page={page} />} />
         <Route path="/:category" element={<Main content={content} />} />

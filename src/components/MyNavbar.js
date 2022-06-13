@@ -56,7 +56,9 @@ const MyNavbar = ({ onInput, onSubmit, userInput, onClickHome, onCategorySelect 
           </Nav>
           <Form className="d-flex mr-auto" onSubmit={(e) => onSubmit(e)}>
             <FormControl type="search" placeholder="Search" className="me-2" aria-label="Search" value={userInput} onInput={(e) => onInput(e)} />
-            <Button variant="outline-dark">Search</Button>
+            <Button variant="outline-dark" type="submit">
+              Search
+            </Button>
           </Form>
         </Navbar.Collapse>
       </Container>
@@ -65,7 +67,3 @@ const MyNavbar = ({ onInput, onSubmit, userInput, onClickHome, onCategorySelect 
 };
 
 export default MyNavbar;
-
-// client.getEntries({
-// 'query': state
-// })
