@@ -1,52 +1,56 @@
-import { useState } from "react";
 import { Navbar, NavDropdown, Container, Nav, Form, FormControl, Button, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./MyNavbar.css";
 import logo from "../images/logo.jpg";
 
 const MyNavbar = ({ onInput, onSubmit, userInput, onClickHome, onCategorySelect }) => {
-  const [expanded, setExpanded] = useState(false);
   return (
-    <Navbar className="color-nav" expand="lg" expanded={expanded}>
+    <Navbar className="color-nav" expand="lg" collapseOnSelect>
       <Container fluid>
         <Navbar.Brand>
           <Link className="custom-link" id="brand-link" to="/" onClick={onClickHome}>
             <Image width="100px" height="50px" className="logo img-responsive" src={logo} alt="logo" />A Taste of History
           </Link>
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={() => setExpanded(expanded ? false : "expanded")} />
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
           <Nav className="mr-auto align-items-end">
-            <Link to="/" className="custom-link" onClick={onClickHome}>
-              Home{" "}
-            </Link>
-            <Link to="/about" className="custom-link">
-              About{" "}
-            </Link>
-            <Link to="/books" className="custom-link">
-              Books{" "}
-            </Link>
+            <Nav.Item>
+              <Nav.Link to="/" as={Link} eventKey="1" className="custom-link" onClick={onClickHome}>
+                Home{" "}
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link to="/about" as={Link} eventKey="2" className="custom-link">
+                About{" "}
+              </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link to="/books" as={Link} eventKey="3" className="custom-link">
+                Books{" "}
+              </Nav.Link>
+            </Nav.Item>
             <NavDropdown title="Categories" id="categories-dropdown">
               <NavDropdown.Item>
-                <Link className="custom-link" to="/Ingredients" onClick={onCategorySelect}>
+                <Nav.Link to="/Ingredients" as={Link} eventKey="4" className="custom-link" onClick={onCategorySelect}>
                   Ingredients
-                </Link>
+                </Nav.Link>
               </NavDropdown.Item>
               <NavDropdown.Item>
-                <Link className="custom-link" to="/Recipes" onClick={onCategorySelect}>
+                <Nav.Link to="/Recipes" as={Link} eventKey="5" className="custom-link" onClick={onCategorySelect}>
                   Recipes
-                </Link>
+                </Nav.Link>
               </NavDropdown.Item>
               <NavDropdown.Item>
-                <Link className="custom-link" to="/Travels" onClick={onCategorySelect}>
+                <Nav.Link to="/Travels" as={Link} eventKey="6" className="custom-link" onClick={onCategorySelect}>
                   Travels
-                </Link>
+                </Nav.Link>
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item>
-                <Link className="custom-link" to="/Lost_foods" onClick={onCategorySelect}>
+                <Nav.Link to="/Lost_foods" as={Link} eventKey="7" className="custom-link" onClick={onCategorySelect}>
                   Lost Foods
-                </Link>
+                </Nav.Link>
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>
