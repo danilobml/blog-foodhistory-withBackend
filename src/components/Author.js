@@ -1,22 +1,23 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Container, Row, Col, Image } from "react-bootstrap";
-import client from "../contentful/client";
 import "./Author.css";
+const axios = require("axios").default;
 
 function Author() {
   const { authorId } = useParams();
-  const [author, setAuthor] = useState();
-  const [posts, setPosts] = useState();
+  const [content, setContent] = useState();
 
   useEffect(() => {
-    client.getEntry(authorId, { include: 10 }).then((data) => setAuthor(data));
-    client.getEntries({ content_type: "blogPost", "fields.author.sys.id": authorId }).then((data) => {
-      setPosts(data);
-    });
+    axios
+      .get(`http://localhost:3000/api/authors/${authorId}/posts`)
+      .then((data) => setContent(data.data))
+      .catch((error) => console.log(error));
   }, []);
 
-  if (!author) {
+  console.log(content);
+
+  if (!content) {
     return null;
   }
   return (
@@ -24,30 +25,30 @@ function Author() {
       <Container className="d-flex flex-column text-start">
         <Row className="mt-5 mb-3">
           <Col>
-            <Image style={{ height: "300px", width: "300px" }} src={author.fields.authorpic.fields.file.url} />
+            <Image style={{ height: "300px", width: "300px" }} src={`http://localhost:3000/authors/${content[0].authorpic}`} />
           </Col>
         </Row>
         <Row className="mt-5">
           <Col>
             <h4>A bit about me:</h4>
-            <p>{author.fields.bio}</p>
+            <p>{content[0].bio}</p>
           </Col>
         </Row>
         <Row className="mt-5">
           <Col>
             <h4>Email:</h4>
-            <p>{author.fields.email}</p>
+            <p>{content[0].email}</p>
           </Col>
         </Row>
         <br />
         <Row className="d-flex">
           <h4>Posts from this Author:</h4>
           <ul>
-            {posts &&
-              posts.items.map((item, index) => (
-                <li>
-                  <Link to={`/post/${item.sys.id}`} key={index} className="custom-link link-posts">
-                    {item.fields.headline}
+            {content &&
+              content.map((item, index) => (
+                <li key={index}>
+                  <Link to={`/post/${item.post_id}`} className="custom-link link-posts">
+                    {item.headline}
                   </Link>
                 </li>
               ))}

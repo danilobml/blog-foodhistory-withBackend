@@ -1,4 +1,3 @@
-import client from "./contentful/client";
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
@@ -11,6 +10,7 @@ import Footer from "./components/Footer";
 import Books from "./components/Books";
 import SignupModal from "./components/SignupModal";
 import "./App.css";
+const axios = require("axios").default;
 
 function App() {
   const [content, setContent] = useState();
@@ -28,18 +28,21 @@ function App() {
     if (!localStorage.getItem("a_taste_of_history_blog")) {
       setTimeout(() => {
         setModalShow(true);
-      }, 3000);
+      }, 30000);
     }
 
     localStorage.setItem("a_taste_of_history_blog", "true");
   }, []);
 
   useEffect(() => {
-    client.getEntries({ content_type: "blogPost", query: searchText, limit, skip }).then((data) => {
-      setContent(data);
-    });
+    axios
+      .get("http://localhost:3000/api/posts")
+      .then((data) => setContent(data.data))
+      .catch((error) => console.log(error));
     window.scrollTo(0, 0);
   }, [searchText, skip, limit]);
+
+  console.log(content);
 
   const handleNextPage = () => {
     const nextSet = skip + limit;

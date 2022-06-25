@@ -9,17 +9,17 @@ function App({ content, onNextPage, onPrevPage, onPageNumbers, page }) {
   return (
     <>
       <Container className="d-flex min-vh-100 max-vw-100 mt-5 justify-content-center">
-        {content.items.length > 0 ? (
+        {content.length > 0 ? (
           <Row className="g-4">
             {category
-              ? content.items
-                  .filter((item) => item.fields.type === category)
+              ? content
+                  .filter((item) => item.type === category)
                   .map((item, index) => (
                     <Col className="m-4" key={index}>
                       <PostCard item={item} />
                     </Col>
                   ))
-              : content.items.map((item, index) => (
+              : content.map((item, index) => (
                   <Col className="m-4" key={index}>
                     <PostCard item={item} />
                   </Col>
@@ -29,13 +29,13 @@ function App({ content, onNextPage, onPrevPage, onPageNumbers, page }) {
           <NoResults />
         )}
       </Container>
-      {!category && (
+      {/* {!category && (
         <Row>
           <Col className="d-flex justify-content-center">
             <Paginate pagItems={content.items} total={content.total} onNextPage={onNextPage} onPrevPage={onPrevPage} onPageNumbers={onPageNumbers} page={page} />
           </Col>
         </Row>
-      )}
+      )} */}
     </>
   );
 }
