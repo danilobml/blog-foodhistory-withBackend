@@ -19,7 +19,7 @@ const About = () => {
     <Container className="d-flex flex-column text-start">
       <Row>
         <Col className="m-3 ms-0">
-          <h1>About a Taste of History</h1>
+          <h1>About A Taste of History</h1>
         </Col>
       </Row>
       <Row>

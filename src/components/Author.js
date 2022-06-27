@@ -37,7 +37,9 @@ function Author() {
         <Row className="mt-5">
           <Col>
             <h4>Email:</h4>
-            <p>{content[0].email}</p>
+            <p>
+              <a href="mailto:contact@tasteofhistory.com">{content[0].email}</a>
+            </p>
           </Col>
         </Row>
         <br />
