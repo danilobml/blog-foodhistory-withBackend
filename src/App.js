@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import Main from "./components/Main";
 import MyNavbar from "./components/MyNavbar";
@@ -10,20 +10,23 @@ import Footer from "./components/Footer";
 import Books from "./components/Books";
 import SignupModal from "./components/SignupModal";
 import "./App.css";
+import serverUrl from "./serverUrl";
 const axios = require("axios").default;
 
 function App() {
   const [content, setContent] = useState();
   const [userInput, setUserInput] = useState("");
   const [searchText, setSearchText] = useState("");
-  const [skip, setSkip] = useState(0);
+  const [skip, setSkip] = useState(1);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(6);
+  const [totalPosts, setTotalPosts] = useState();
   const [category, setCategory] = useState();
   const [modalShow, setModalShow] = useState(false);
   const navigate = useNavigate();
   const pageTopRef = useRef(null);
 
+  console.log(totalPosts);
   useEffect(() => {
     if (!localStorage.getItem("a_taste_of_history_blog")) {
       setTimeout(() => {
@@ -36,19 +39,20 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/posts")
-      .then((data) => setContent(data.data))
+      .get(`${serverUrl}/api/posts/${page}`)
+      .then(({ data }) => {
+        if (!totalPosts) setTotalPosts(data.count);
+        setContent(data.posts);
+      })
       .catch((error) => console.log(error));
     window.scrollTo(0, 0);
-  }, [searchText, skip, limit]);
-
-  console.log(content);
+  }, [page]);
 
   const handleNextPage = () => {
     const nextSet = skip + limit;
-    if (nextSet >= content.total) return;
+    if (nextSet >= totalPosts) return;
     setSkip(nextSet);
-    setPage((nextSet + limit) / limit);
+    setPage(Math.floor(nextSet + limit) / limit);
     pageTopRef.current.scrollIntoView();
   };
 
@@ -87,8 +91,8 @@ function App() {
 
   const handleCategorySelect = () => {
     setSearchText("");
-    setLimit(100);
   };
+  console.log(limit);
 
   if (!content) return <h1>Loading...</h1>;
 
@@ -96,7 +100,7 @@ function App() {
     <div ref={pageTopRef} className="App">
       <MyNavbar onInput={handleUserInput} onSubmit={handleSearch} onClickHome={handleGoHome} onCategorySelect={handleCategorySelect} userInput={userInput} />
       <Routes>
-        <Route path="/" element={<Main content={content} onNextPage={handleNextPage} onPrevPage={handlePrevPage} onPageNumbers={handlePageNumbers} page={page} />} />
+        {totalPosts && <Route path="/" element={<Main content={content} totalPosts={totalPosts} onNextPage={handleNextPage} onPrevPage={handlePrevPage} onPageNumbers={handlePageNumbers} page={page} />} />}
         <Route path="/:category" element={<Main content={content} />} />
         <Route path="/post/:postId" element={<Post />} />
         <Route path="/about" element={<About />} />
@@ -104,7 +108,6 @@ function App() {
         <Route path="/books" element={<Books />} />
       </Routes>
       <SignupModal show={modalShow} onHide={() => setModalShow(false)} />
-
       <Footer />
     </div>
   );

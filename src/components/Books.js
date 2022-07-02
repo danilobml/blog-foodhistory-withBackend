@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Image } from "react-bootstrap";
-import client from "../contentful/client";
 import BookCard from "./BookCard";
 import "./Books.css";
+import serverUrl from "../serverUrl";
 const axios = require("axios").default;
 
 function Books() {
@@ -10,7 +10,7 @@ function Books() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/books")
+      .get(`${serverUrl}/api/books`)
       .then((data) => setBooks(data.data))
       .catch((error) => console.log(error));
     // client.getEntries({ content_type: "books" }).then((data) => setBooks(data));

@@ -21,7 +21,7 @@ const SignupModal = (props) => {
             <Form.Text className="text-muted">We'll never share your email with anyone else.</Form.Text>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Get me the latest news" />
+            <Form.Check type="checkbox" label="I agree with the Terms and Conditions" />
           </Form.Group>
           <Button variant="primary" type="submit" onClick={props.onHide}>
             Submit

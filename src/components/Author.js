@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import "./Author.css";
+import serverUrl from "../serverUrl";
 const axios = require("axios").default;
 
 function Author() {
@@ -10,7 +11,7 @@ function Author() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/api/authors/${authorId}/posts`)
+      .get(`${serverUrl}/api/authors/${authorId}/posts`)
       .then((data) => setContent(data.data))
       .catch((error) => console.log(error));
   }, []);
@@ -25,7 +26,7 @@ function Author() {
       <Container className="d-flex flex-column text-start">
         <Row className="mt-5 mb-3">
           <Col>
-            <Image style={{ height: "300px", width: "300px" }} src={`http://localhost:3000/authors/${content[0].authorpic}`} />
+            <Image style={{ height: "300px", width: "300px" }} src={`${serverUrl}/authors/${content[0].authorpic}`} />
           </Col>
         </Row>
         <Row className="mt-5">

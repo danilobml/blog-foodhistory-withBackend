@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import AuthorCard from "./AuthorCard";
+import serverUrl from "../serverUrl";
 const axios = require("axios").default;
 
 const About = () => {
@@ -8,7 +9,7 @@ const About = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/authors")
+      .get(`${serverUrl}/api/authors`)
       .then((data) => setAuthor(data.data))
       .catch((error) => console.log(error));
   }, []);

@@ -3,6 +3,8 @@ import { Pagination } from "react-bootstrap";
 function Paginate({ total, onNextPage, onPrevPage, onPageNumbers, page }) {
   const items = [];
 
+  console.log(total);
+
   for (let number = 1; number <= Math.ceil(total / 6); number++) {
     items.push(
       <Pagination.Item key={number} active={number === page} onClick={() => onPageNumbers(number)}>
