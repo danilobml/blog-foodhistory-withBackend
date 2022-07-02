@@ -11,6 +11,8 @@ import Books from "./components/Books";
 import SignupModal from "./components/SignupModal";
 import "./App.css";
 import serverUrl from "./serverUrl";
+import SearchResults from "./components/SearchResults";
+import Categories from "./components/Categories";
 const axios = require("axios").default;
 
 function App() {
@@ -25,6 +27,7 @@ function App() {
   const [modalShow, setModalShow] = useState(false);
   const navigate = useNavigate();
   const pageTopRef = useRef(null);
+  const [home, setHome] = useState(true);
 
   console.log(totalPosts);
   useEffect(() => {
@@ -38,15 +41,17 @@ function App() {
   }, []);
 
   useEffect(() => {
-    axios
-      .get(`${serverUrl}/api/posts/${page}`)
-      .then(({ data }) => {
-        if (!totalPosts) setTotalPosts(data.count);
-        setContent(data.posts);
-      })
-      .catch((error) => console.log(error));
-    window.scrollTo(0, 0);
-  }, [page]);
+    if (home) {
+      axios
+        .get(`${serverUrl}/api/posts/${page}`)
+        .then(({ data }) => {
+          if (!totalPosts) setTotalPosts(data.count);
+          setContent(data.posts);
+        })
+        .catch((error) => console.log(error));
+      window.scrollTo(0, 0);
+    }
+  }, [page, home]);
 
   const handleNextPage = () => {
     const nextSet = skip + limit;
@@ -78,21 +83,19 @@ function App() {
     e.preventDefault();
     setSearchText(userInput);
     setUserInput("");
-    navigate("/");
-    setLimit(6);
+    navigate(`/search_results/${userInput}`);
   };
 
   const handleGoHome = () => {
+    navigate("/");
     setSearchText("");
     setSkip(0);
     setPage(1);
     setLimit(6);
+    setHome(true);
   };
 
-  const handleCategorySelect = () => {
-    setSearchText("");
-  };
-  console.log(limit);
+  const handleCategorySelect = () => {};
 
   if (!content) return <h1>Loading...</h1>;
 
@@ -106,6 +109,8 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/author/:authorId" element={<Author />} />
         <Route path="/books" element={<Books />} />
+        <Route path="/search_results/:searchParams" element={<SearchResults content={content} totalPosts={totalPosts} setTotalPosts={setTotalPosts} setContent={setContent} setHome={setHome} />} />
+        <Route path="/categories/:category" element={<Categories content={content} totalPosts={totalPosts} setTotalPosts={setTotalPosts} setContent={setContent} setHome={setHome} />} />
       </Routes>
       <SignupModal show={modalShow} onHide={() => setModalShow(false)} />
       <Footer />

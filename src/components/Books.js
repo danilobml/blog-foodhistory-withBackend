@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container, Row, Col, Image } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import BookCard from "./BookCard";
 import "./Books.css";
 import serverUrl from "../serverUrl";
@@ -13,7 +13,6 @@ function Books() {
       .get(`${serverUrl}/api/books`)
       .then((data) => setBooks(data.data))
       .catch((error) => console.log(error));
-    // client.getEntries({ content_type: "books" }).then((data) => setBooks(data));
   }, []);
 
   console.log(books);

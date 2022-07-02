@@ -32,23 +32,23 @@ const MyNavbar = ({ onInput, onSubmit, userInput, onClickHome, onCategorySelect 
             </Nav.Item>
             <NavDropdown title="Categories" id="categories-dropdown">
               <NavDropdown.Item>
-                <Nav.Link to="/Ingredients" as={Link} eventKey="4" className="custom-link" onClick={onCategorySelect}>
+                <Nav.Link to="/categories/Ingredients" as={Link} eventKey="4" className="custom-link" onClick={onCategorySelect}>
                   Ingredients
                 </Nav.Link>
               </NavDropdown.Item>
               <NavDropdown.Item>
-                <Nav.Link to="/Recipes" as={Link} eventKey="5" className="custom-link" onClick={onCategorySelect}>
+                <Nav.Link to="/categories/Recipes" as={Link} eventKey="5" className="custom-link" onClick={onCategorySelect}>
                   Recipes
                 </Nav.Link>
               </NavDropdown.Item>
               <NavDropdown.Item>
-                <Nav.Link to="/Travels" as={Link} eventKey="6" className="custom-link" onClick={onCategorySelect}>
+                <Nav.Link to="categories/Travels" as={Link} eventKey="6" className="custom-link" onClick={onCategorySelect}>
                   Travels
                 </Nav.Link>
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item>
-                <Nav.Link to="/Lost_foods" as={Link} eventKey="7" className="custom-link" onClick={onCategorySelect}>
+                <Nav.Link to="categories/Lost_foods" as={Link} eventKey="7" className="custom-link" onClick={onCategorySelect}>
                   Lost Foods
                 </Nav.Link>
               </NavDropdown.Item>

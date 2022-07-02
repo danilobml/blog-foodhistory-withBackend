@@ -20,8 +20,6 @@ const Post = () => {
       .catch((error) => console.log(error));
   }, [postId]);
 
-  console.log(history);
-
   if (!content) {
     return null;
   }

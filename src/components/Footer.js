@@ -15,14 +15,14 @@ const Footer = () => {
         </Col>
         <Col>
           <h5>Follow us on: </h5>
-          <a href="https://www.instagram.com" target="_blank">
-            <img src={instagram} className="social-icon" />
+          <a href="https://www.instagram.com" target="_blank" rel="noreferrer">
+            <img src={instagram} className="social-icon" alt="instagram icon" />
           </a>
-          <a href="https://twitter.com" target="_blank">
-            <img src={twitter} className="social-icon" />
+          <a href="https://twitter.com" target="_blank" rel="noreferrer">
+            <img src={twitter} className="social-icon" alt="twitter icon" />
           </a>
-          <a href="https://facebook.com" target="_blank">
-            <img src={facebook} className="social-icon" />
+          <a href="https://facebook.com" target="_blank" rel="noreferrer">
+            <img src={facebook} className="social-icon" alt="facebook icon" />
           </a>
         </Col>
         <Col className="align-self-center">
