@@ -10,6 +10,7 @@
     "axios": "^0.27.2",
     "bootstrap": "^5.1.3",
     "contentful": "^9.1.28",
+    "netlify": "^11.0.2",
     "react": "^18.1.0",
     "react-bootstrap": "^2.4.0",
     "react-dom": "^18.1.0",
@@ -20,7 +21,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "CI= react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
