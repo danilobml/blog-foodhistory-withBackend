@@ -14,8 +14,6 @@ const About = () => {
       .catch((error) => console.log(error));
   }, []);
 
-  console.log(author);
-
   return (
     <Container className="d-flex flex-column text-start">
       <Row>

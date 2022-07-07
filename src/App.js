@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import Main from "./components/Main";
 import MyNavbar from "./components/MyNavbar";
@@ -18,18 +18,15 @@ const axios = require("axios").default;
 function App() {
   const [content, setContent] = useState();
   const [userInput, setUserInput] = useState("");
-  const [searchText, setSearchText] = useState("");
   const [skip, setSkip] = useState(1);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(6);
   const [totalPosts, setTotalPosts] = useState();
-  const [category, setCategory] = useState();
   const [modalShow, setModalShow] = useState(false);
   const navigate = useNavigate();
   const pageTopRef = useRef(null);
   const [home, setHome] = useState(true);
 
-  console.log(totalPosts);
   useEffect(() => {
     if (!localStorage.getItem("a_taste_of_history_blog")) {
       setTimeout(() => {
@@ -51,7 +48,7 @@ function App() {
         .catch((error) => console.log(error));
       window.scrollTo(0, 0);
     }
-  }, [page, home]);
+  }, [page, home, totalPosts]);
 
   const handleNextPage = () => {
     const nextSet = skip + limit;
@@ -81,14 +78,12 @@ function App() {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    setSearchText(userInput);
     setUserInput("");
     navigate(`/search_results/${userInput}`);
   };
 
   const handleGoHome = () => {
     navigate("/");
-    setSearchText("");
     setSkip(0);
     setPage(1);
     setLimit(6);

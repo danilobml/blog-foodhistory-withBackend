@@ -14,9 +14,7 @@ function Author() {
       .get(`${serverUrl}/api/authors/${authorId}/posts`)
       .then((data) => setContent(data.data))
       .catch((error) => console.log(error));
-  }, []);
-
-  console.log(content);
+  }, [authorId]);
 
   if (!content) {
     return null;

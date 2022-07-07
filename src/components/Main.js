@@ -5,7 +5,6 @@ import Paginate from "./Paginate";
 import NoResults from "./NoResults";
 
 function App({ content, onNextPage, onPrevPage, onPageNumbers, page, totalPosts }) {
-  console.log(totalPosts);
   return (
     <>
       <Container className="d-flex min-vh-100 max-vw-100 mt-5 justify-content-center">

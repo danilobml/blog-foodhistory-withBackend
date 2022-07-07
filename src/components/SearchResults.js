@@ -6,9 +6,8 @@ import NoResults from "./NoResults";
 import serverUrl from "../serverUrl";
 const axios = require("axios").default;
 
-function SearchResults({ content, setContent, setTotalPosts, setHome }) {
+function SearchResults({ content, setContent, setHome }) {
   const { searchParams } = useParams();
-  console.log(useParams);
   setHome(false);
   useEffect(() => {
     axios

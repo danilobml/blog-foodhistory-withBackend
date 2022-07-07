@@ -15,8 +15,6 @@ function Books() {
       .catch((error) => console.log(error));
   }, []);
 
-  console.log(books);
-
   if (!books) {
     return null;
   }

@@ -5,7 +5,6 @@ import "./PostCard.css";
 import serverUrl from "../serverUrl";
 
 const PostCard = ({ item }) => {
-  console.log(item);
   const [open, setOpen] = useState(false);
   return (
     <Container id="post-card" className="d-flex justify-content-center" style={{ width: "21.5rem", height: "fit-content" }}>
