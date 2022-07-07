@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./MyNavbar.css";
 import logo from "../images/logo.jpg";
 
-const MyNavbar = ({ onInput, onSubmit, userInput, onClickHome, onCategorySelect }) => {
+const MyNavbar = ({ onInput, onSubmit, userInput, onClickHome }) => {
   return (
     <Navbar className="color-nav" expand="lg" collapseOnSelect>
       <Container fluid>
@@ -32,23 +32,23 @@ const MyNavbar = ({ onInput, onSubmit, userInput, onClickHome, onCategorySelect 
             </Nav.Item>
             <NavDropdown title="Categories" id="categories-dropdown">
               <NavDropdown.Item>
-                <Nav.Link to="/categories/Ingredients" as={Link} eventKey="4" className="custom-link" onClick={onCategorySelect}>
+                <Nav.Link to="/categories/Ingredients" as={Link} eventKey="4" className="custom-link">
                   Ingredients
                 </Nav.Link>
               </NavDropdown.Item>
               <NavDropdown.Item>
-                <Nav.Link to="/categories/Recipes" as={Link} eventKey="5" className="custom-link" onClick={onCategorySelect}>
+                <Nav.Link to="/categories/Recipes" as={Link} eventKey="5" className="custom-link">
                   Recipes
                 </Nav.Link>
               </NavDropdown.Item>
               <NavDropdown.Item>
-                <Nav.Link to="categories/Travels" as={Link} eventKey="6" className="custom-link" onClick={onCategorySelect}>
+                <Nav.Link to="categories/Travels" as={Link} eventKey="6" className="custom-link">
                   Travels
                 </Nav.Link>
               </NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item>
-                <Nav.Link to="categories/Lost_foods" as={Link} eventKey="7" className="custom-link" onClick={onCategorySelect}>
+                <Nav.Link to="categories/Lost_foods" as={Link} eventKey="7" className="custom-link">
                   Lost Foods
                 </Nav.Link>
               </NavDropdown.Item>

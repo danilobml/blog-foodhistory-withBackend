@@ -2,7 +2,7 @@ import { Row, Col } from "react-bootstrap";
 import Paginate from "./Paginate";
 import CardsContainer from "./CardsContainer";
 
-function App({ content, onNextPage, onPrevPage, onPageNumbers, page, totalPosts }) {
+function Main({ content, onNextPage, onPrevPage, onPageNumbers, page, totalPosts }) {
   return (
     <>
       <CardsContainer content={content} />
@@ -17,4 +17,4 @@ function App({ content, onNextPage, onPrevPage, onPageNumbers, page, totalPosts 
   );
 }
 
-export default App;
+export default Main;
