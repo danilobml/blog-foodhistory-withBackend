@@ -1,5 +1,5 @@
-import "./Footer.css";
 import { Container, Row, Col } from "react-bootstrap";
+import "./Footer.css";
 import instagram from "../images/instagram-icon.png";
 import twitter from "../images/twitter-icon.png";
 import facebook from "../images/facebook-icon.png";

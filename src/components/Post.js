@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Container, Row, Col, Image } from "react-bootstrap";
-import "./Post.css";
 import { Markup } from "react-render-markup";
+import "./Post.css";
 import serverUrl from "../serverUrl";
 const axios = require("axios").default;
 
@@ -10,12 +10,14 @@ const Post = () => {
   const { postId } = useParams();
   const [content, setContent] = useState();
   const [history, setHistory] = useState();
+  const [date, setDate] = useState();
   useEffect(() => {
     axios
       .get(`${serverUrl}/api/posts/post/${postId}`)
       .then((data) => {
         setContent(data.data[0]);
         setHistory(data.data[0].history);
+        setDate(data.data[0].publishdate.slice("T", 10));
       })
       .catch((error) => console.log(error));
   }, [postId]);
@@ -42,7 +44,7 @@ const Post = () => {
               <hr />
               <h4>{content.name}</h4>
               <h6>{content.email}</h6>
-              <p>Posted: {content.publishdate}</p>
+              <p>Posted: {date}</p>
               <hr />
             </Col>
           </Link>
